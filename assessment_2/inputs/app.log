@@ -1,0 +1,70 @@
+2026-04-07 09:01:14 INFO  [worker-1] Redis connection pool initialized (max_size=20)
+2026-04-07 09:01:14 INFO  [worker-2] Redis connection pool initialized (max_size=20)
+2026-04-07 09:01:14 INFO  [healthcheck] /health → 200 OK (2ms)
+2026-04-07 09:01:17 INFO  [worker-3] Redis connection pool initialized (max_size=20)
+2026-04-07 09:01:22 INFO  [healthcheck] /health → 200 OK (1ms)
+2026-04-07 09:02:05 INFO  [worker-1] picked up task task-8821 (type=payment_confirmation)
+2026-04-07 09:02:05 INFO  [worker-2] picked up task task-8822 (type=email_dispatch)
+2026-04-07 09:02:07 INFO  [worker-2] task complete task-8822 result_written=True
+2026-04-07 09:02:09 INFO  [worker-1] task complete task-8821 result_written=True
+2026-04-07 09:02:15 INFO  [db] connection pool: 3/20 active
+2026-04-07 09:02:22 INFO  [healthcheck] /health → 200 OK (2ms)
+2026-04-07 09:03:01 INFO  [worker-4] picked up task task-8823 (type=payment_confirmation)
+2026-04-07 09:03:01 INFO  [worker-5] picked up task task-8823 (type=payment_confirmation)
+2026-04-07 09:03:03 INFO  [worker-4] task complete task-8823 result_written=True
+2026-04-07 09:03:03 ERROR [worker-5] IntegrityError: duplicate key value violates unique constraint "task_results_pkey"
+2026-04-07 09:03:03 ERROR [worker-5] DETAIL: Key (task_id)=(task-8823) already exists.
+2026-04-07 09:03:03 ERROR [worker-5] Traceback (most recent call last):
+2026-04-07 09:03:03 ERROR [worker-5]   File "/app/task_worker.py", line 94, in execute_task
+2026-04-07 09:03:03 ERROR [worker-5]     db.session.commit()
+2026-04-07 09:03:03 ERROR [worker-5]   File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1451, in commit
+2026-04-07 09:03:03 ERROR [worker-5]     self._transaction.commit(_to_root=self.future)
+2026-04-07 09:03:03 ERROR [worker-5]   File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 828, in commit
+2026-04-07 09:03:03 ERROR [worker-5]     self._prepare_impl()
+2026-04-07 09:03:03 ERROR [worker-5]   File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 808, in _prepare_impl
+2026-04-07 09:03:03 ERROR [worker-5]     self.session.flush()
+2026-04-07 09:03:03 ERROR [worker-5]   File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 3316, in flush
+2026-04-07 09:03:03 ERROR [worker-5]     self._flush(objects)
+2026-04-07 09:03:03 ERROR [worker-5]   File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 3456, in _flush
+2026-04-07 09:03:03 ERROR [worker-5]     transaction.rollback(_capture_exception=True)
+2026-04-07 09:03:03 ERROR [worker-5]   File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 878, in rollback
+2026-04-07 09:03:03 ERROR [worker-5]     self._manager.pop(self)
+2026-04-07 09:03:03 ERROR [worker-5] sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "task_results_pkey"
+2026-04-07 09:03:03 ERROR [worker-5] [SQL: INSERT INTO task_results (task_id, result, completed_at) VALUES (%(task_id)s, %(result)s, %(completed_at)s)]
+2026-04-07 09:03:03 ERROR [worker-5] [parameters: {'task_id': 'task-8823', 'result': '{"status": "confirmed", ...}', 'completed_at': '2026-04-07T09:03:03'}]
+2026-04-07 09:03:04 WARNING [worker-5] IntegrityError swallowed — task-8823 marked as complete by another worker, skipping retry
+2026-04-07 09:03:04 WARNING [worker-5] task-8823 status not updated — assuming already handled
+2026-04-07 09:03:22 INFO  [healthcheck] /health → 200 OK (2ms)
+2026-04-07 09:04:11 INFO  [db] connection pool: 5/20 active
+2026-04-07 09:04:19 INFO  [worker-6] picked up task task-8824 (type=report_generation)
+2026-04-07 09:04:19 INFO  [worker-7] picked up task task-8824 (type=report_generation)
+2026-04-07 09:04:21 INFO  [worker-6] task complete task-8824 result_written=True
+2026-04-07 09:04:22 ERROR [worker-7] IntegrityError: duplicate key value violates unique constraint "task_results_pkey"
+2026-04-07 09:04:22 ERROR [worker-7] DETAIL: Key (task_id)=(task-8824) already exists.
+2026-04-07 09:04:22 WARNING [worker-7] IntegrityError swallowed — task-8824 marked as complete by another worker, skipping retry
+2026-04-07 09:04:23 WARNING [worker-7] task-8824 status not updated — assuming already handled
+2026-04-07 09:04:55 INFO  [healthcheck] /health → 200 OK (1ms)
+2026-04-07 09:05:08 INFO  [worker-3] picked up task task-8825 (type=payment_confirmation)
+2026-04-07 09:05:10 INFO  [worker-3] task complete task-8825 result_written=True
+2026-04-07 09:05:44 INFO  [db] connection pool: 4/20 active
+2026-04-07 09:05:55 INFO  [healthcheck] /health → 200 OK (2ms)
+2026-04-07 09:06:12 INFO  [worker-1] picked up task task-8826 (type=invoice_generation)
+2026-04-07 09:06:12 INFO  [worker-8] picked up task task-8826 (type=invoice_generation)
+2026-04-07 09:06:13 INFO  [worker-1] task complete task-8826 result_written=True
+2026-04-07 09:06:14 ERROR [worker-8] IntegrityError: duplicate key value violates unique constraint "task_results_pkey"
+2026-04-07 09:06:14 WARNING [worker-8] IntegrityError swallowed — task-8826 marked as complete by another worker, skipping retry
+2026-04-07 09:06:14 WARNING [worker-8] task-8826 status not updated — assuming already handled
+2026-04-07 09:06:22 INFO  [healthcheck] /health → 200 OK (3ms)
+2026-04-07 09:07:33 INFO  [db] connection pool: 6/20 active
+2026-04-07 09:08:01 INFO  [worker-2] picked up task task-8827 (type=payment_confirmation)
+2026-04-07 09:08:03 INFO  [worker-2] task complete task-8827 result_written=True
+2026-04-07 09:08:22 INFO  [healthcheck] /health → 200 OK (1ms)
+2026-04-07 09:09:14 INFO  [worker-4] picked up task task-8828 (type=payment_confirmation)
+2026-04-07 09:09:14 INFO  [worker-5] picked up task task-8828 (type=payment_confirmation)
+2026-04-07 09:09:16 INFO  [worker-4] task complete task-8828 result_written=True
+2026-04-07 09:09:16 ERROR [worker-5] IntegrityError: duplicate key value violates unique constraint "task_results_pkey"
+2026-04-07 09:09:17 WARNING [worker-5] IntegrityError swallowed — task-8828 marked as complete by another worker, skipping retry
+2026-04-07 09:09:17 WARNING [worker-5] task-8828 status not updated — assuming already handled
+2026-04-07 09:09:22 INFO  [healthcheck] /health → 200 OK (2ms)
+2026-04-07 09:10:44 INFO  [db] connection pool: 4/20 active
+2026-04-07 09:11:55 INFO  [healthcheck] /health → 200 OK (1ms)

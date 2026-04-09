@@ -1,0 +1,19 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.egg-info/
+
+# Generated outputs — committed as examples but ignored on re-run
+traces/
+assessment_1/outputs/
+assessment_2/outputs/
+
+# SQLite files the repro script might generate
+*.db
+*.db-shm
+*.db-wal
+
+# macOS
+.DS_Store
